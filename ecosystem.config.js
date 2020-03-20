@@ -21,10 +21,10 @@ module.exports = {
       ref: "origin/master",
       repo: "https://github.com/weikeduoppp/express-blog.git",
       path: "/www/blog/production", // 部署服务器的目录 -> 根目录
-      ssh_options: "StrictHostKeyChecking=no",
+      ssh_options: ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
       // 发布脚本
       "post-deploy":
-        "npm install --registry=https://registry.npm.taobao.org && pm2 startOrRestart ecosystem.config.js --env production",
+        "npm install; pm2 startOrRestart ecosystem.config.js --env production",
       // Environment variables that must be injected in all applications on this env
       env: {
         NODE_ENV: "production"

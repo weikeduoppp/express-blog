@@ -19,7 +19,7 @@ module.exports = {
       // 默认22
       // port: "",
       ref: "origin/master",
-      repo: "git@github.com:weikeduoppp/express-blog.git",
+      repo: "https://github.com/weikeduoppp/express-blog.git",
       path: "/www/blog/production", // 部署服务器的目录 -> 根目录
       ssh_options: "StrictHostKeyChecking=no",
       // 发布脚本

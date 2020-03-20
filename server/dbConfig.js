@@ -1,5 +1,6 @@
+var env = process.env.NODE_ENV === 'production'
 module.exports = {
-  host: 'localhost',
-  port: '27017',
+  host: env ? '127.0.0.1' : 'localhost',
+  port: env ? '19999' : '27017',
   db: 'blog'
 };

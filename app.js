@@ -16,7 +16,7 @@ const uploadRouter = require('./routes/upload');
 // 相关配置
 app.use(logger('dev'));
 // 添req.body -> post请求
-app.use(express.json());
+app.use(express.json());  
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 

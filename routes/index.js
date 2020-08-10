@@ -11,6 +11,7 @@ router.get('/temp', (req, res) => {
     btn_text: "馬上0元領取",
     gtag_label: "NYK2CP3EjNkBEM7aoKIC",
     gtagid: "AW-608709966",
+    paramList: "lpid=22136&ext=__LANDINGPAGE_EXT__"
   });
 });
 

@@ -3,6 +3,18 @@ const router = express.Router();
 const User = require('../models/user');
 const md5 = require('blueimp-md5');
 
+
+// 登录页面
+router.get('/temp', (req, res) => {
+  res.render("temp", {
+    title: "0元領取3節編程課程",
+    btn_text: "馬上0元領取",
+    gtag_label: "NYK2CP3EjNkBEM7aoKIC",
+    gtagid: "AW-608709966",
+  });
+});
+
+
 // 首页
 router.get('/', (req, res) => {
   console.log(req.session.user);
@@ -16,6 +28,7 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   res.render('login');
 });
+
 
 // 设置页码
 router.get('/settings/profile', (req, res) => {

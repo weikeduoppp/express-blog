@@ -55,6 +55,7 @@ mongoose.connect(`mongodb://${dbConfig.host}:${dbConfig.port}/${dbConfig.db}`, {
   useUnifiedTopology: true
 });
 
+
 // 路由
 app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
@@ -77,3 +78,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+
+	

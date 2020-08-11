@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const md5 = require('blueimp-md5');
+const { request: api } = require('../utils');
+
 
 
 // 登录页面
@@ -11,9 +13,29 @@ router.get('/temp', (req, res) => {
     btn_text: "馬上0元領取",
     gtag_label: "NYK2CP3EjNkBEM7aoKIC",
     gtagid: "AW-608709966",
-    paramList: "lpid=22136&ext=__LANDINGPAGE_EXT__"
+    paramList: "lpid=22136&ext=__LANDINGPAGE_EXT__",
+    top_img: "https://download.ydstatic.com/ead/kada_top_img.jpg",
+    bottom_img: "https://download.ydstatic.com/ead/kada_bottom_img.jpg",
   });
 });
+
+// 动态路由
+api.get("https://c.youdao.com/dsp/google_ads.json").then(async (data) => {
+  await Promise.all(data.map((d) => {
+    router.get(`/${d.url}`, async (req, res) => {
+      res.render("temp", {
+        title: d.title,
+        btn_text: d.btn_text,
+        gtag_label: d.gtag_label,
+        gtagid: d.gtagid,
+        paramList: d.paramList,
+        top_img: d.top_img,
+        bottom_img: d.bottom_img,
+      });
+    });
+  }))
+ });
+
 
 
 // 首页

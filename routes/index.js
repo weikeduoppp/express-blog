@@ -7,7 +7,8 @@ const { request: api } = require('../utils');
 
 
 // 登录页面
-router.get('/temp', (req, res) => {
+router.get('/refresh', async (req, res) => {
+  await fetch()
   res.render("temp", {
     title: "0元領取3節編程課程",
     btn_text: "馬上0元領取",
@@ -20,21 +21,57 @@ router.get('/temp', (req, res) => {
 });
 
 // 动态路由
-api.get("https://c.youdao.com/dsp/google_ads.json").then(async (data) => {
-  await Promise.all(data.map((d) => {
-    router.get(`/${d.url}`, async (req, res) => {
-      res.render("temp", {
-        title: d.title,
-        btn_text: d.btn_text,
-        gtag_label: d.gtag_label,
-        gtagid: d.gtagid,
-        paramList: d.paramList,
-        top_img: d.top_img,
-        bottom_img: d.bottom_img,
+async function fetch () {
+  const data = await api.get("https://c.youdao.com/dsp/google_ads.json");
+  console.log(data)
+  return await Promise.all(
+    data.map((d) => {
+      router.get(`/${d.url}`, async (req, res) => {
+        if(d.template === 'temp') {
+           res.render(`${d.template}`, {
+             title: d.title,
+             btn_text: d.btn_text,
+             gtag_label: d.gtag_label,
+             gtagid: d.gtagid,
+             paramList: d.paramList,
+             top_img: d.top_img,
+             bottom_img: d.bottom_img,
+           });
+        } else {
+          console.log(d.url)
+           res.render(`${d.template}`, {
+             title: d.title,
+             btn_text: d.btn_text,
+             gtag_label: d.gtag_label,
+             gtagid: d.gtagid,
+             paramList: d.paramList,
+             top_img: d.top_img,
+             bottom_img: d.bottom_img,
+             active_url: d.active_url
+           });
+        }
       });
-    });
-  }))
- });
+    })
+  );
+}
+
+fetch();
+// 动态路由
+// api.get("https://c.youdao.com/dsp/google_ads.json").then(async (data) => {
+//   await Promise.all(data.map((d) => {
+//     router.get(`/${d.url}`, async (req, res) => {
+//       res.render(`${d.template}`, {
+//         title: d.title,
+//         btn_text: d.btn_text,
+//         gtag_label: d.gtag_label,
+//         gtagid: d.gtagid,
+//         paramList: d.paramList,
+//         top_img: d.top_img,
+//         bottom_img: d.bottom_img,
+//       });
+//     });
+//   }))
+//  });
 
 
 

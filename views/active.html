@@ -892,14 +892,8 @@
 
     /* 触发定位表单 */
     function button_form_submit() {
-       /* 落地页-在线咨询上报 */
-       if (isPermanentURL) {
-        var paramList = '{{paramList}}';
-        var url_advice = "https://dsp-impr2.youdao.com/lpaction.s?type=advisory&" + paramList;
-        var img1 = new Image();
-        img1.src = url_advice;
-       }
-       window.location.href = "{{active_url}}";
+      window.scrollTo(0, document.getElementById('frm').offsetTop);
+
     }
   </script>
 
@@ -1351,19 +1345,11 @@
                   }
                   if (result.data.status === 'fail') {
                     hallToast.success(result.data.text);
-                    $('.submit').css({
-                      'background-color': 'rgba(233,61,52,1)',
-                      'cursor': 'default',
-                      'color': 'rgba(255,255,255,1)'
-                    });
+                    $('.submit').css({ 'background-color': 'rgba(233,61,52,1)', 'cursor': 'default', 'color': 'rgba(255,255,255,1)' });
                     cancelTap = true;
                   } else {
-                    hallToast.success('提交成功！请等候老师联系您！');
-                    $('.submit').css({
-                      'background-color': 'rgba(233,61,52,1)',
-                      'cursor': 'default',
-                      'color': 'rgba(255,255,255,1)'
-                    });
+                    hallToast.success('馬上進入課程領取頁面！');
+                    $('.submit').css({ 'background-color': 'rgba(233,61,52,1)', 'cursor': 'default', 'color': 'rgba(255,255,255,1)' });
                     cancelTap = true;
 
                     /* 往外部-广告主转发数据 */
@@ -1378,9 +1364,9 @@
                       console.log('post_bxm_finish');
                     }
 
-                    if (false) {
+                    if ( true) {
                       setTimeout(function() {
-                        location.href = "";
+                        location.href = "{{active_url}}";
                       }, 3000);
                     }
                   }

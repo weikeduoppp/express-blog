@@ -189,7 +189,11 @@
         eventLabel: $('#email').val(),
         eventValue: $('#weixin').val()
       });
-
+      $('#toast_id').text('{{success_text}}').slideDown(200, () => {
+        setTimeout(() => {
+          $('#toast_id').hide()
+        }, 3000)
+      })
     })
   </script>
 </body>

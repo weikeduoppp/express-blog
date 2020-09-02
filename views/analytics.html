@@ -158,8 +158,8 @@
     }
 
     function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof (url) != 'undefined') {
+      var callback = function() {
+        if (typeof(url) != 'undefined') {
           window.location = url;
         }
       };
@@ -176,63 +176,21 @@
     $('#btn_submit').on('click', (e) => {
       e.preventDefault()
       e.stopPropagation();
-      let param = {
-        id0: $('#name').val(),
-        id1: $('#select').val() + $('#phone').val(),
-        id2: $('#email').val(),
-        id3: $('#weixin').val(),
-      }
+      // let param = {
+      //   id0: $('#name').val(),
+      //   id1: $('#select').val() + $('#phone').val(),
+      //   id2: $('#email').val(),
+      //   id3: $('#weixin').val(),
+      // }
       ga('send', {
         hitType: 'event',
-        eventCategory: 'Videos',
-        eventAction: 'play',
-        eventLabel: 'Fall Campaign',
-        eventValue: 'Fall Campaign'
+        eventCategory: $('#name').val(),
+        eventAction: $('#select').val() + $('#phone').val(),
+        eventLabel: $('#email').val(),
+        eventValue: $('#weixin').val()
       });
-      let uploadJsonObj = {
-        type: "submitform",
-        lpid: get_querystring("{{paramList}}", "lpid"),
-        formContent: JSON.stringify(param),
-        ext: get_querystring("{{paramList}}", "ext"),
-      };
-      console.log(uploadJsonObj);
-      var formData = new FormData();
-      for (var item in uploadJsonObj) {
-        formData.append(item, uploadJsonObj[item]);
-      }
-      $.ajax({
-        type: 'POST',
-        url: 'https://dsp-impr2.youdao.com/lpaction.s',
-        data: formData,
-        async: false,
-        contentType: false,
-        processData: false,
-        success: function (result) {
-          // 转化跟踪 添加pixelCode
-          if (window.gtagid) {
-            gtag_report_conversion(window.location.href)
-          }
-          if (result.data.status === 'fail') {
-            $('#toast_id').text(result.data.message).slideDown()
-          } else {
-            $('#toast_id').text('{{success_text}}').slideDown(200, () => {
-              setTimeout(() => {
-                $('#toast_id').hide()
-              }, 3000)
-            })
-            if (true) {
-              setTimeout(function () {
-                if ("{{active_url}}") location.href = "{{active_url}}";
-              }, 200);
-            }
-          }
-        },
-        error: function () {
-          hallToast.success('表单提交失败');
-        },
-      });
+
     })
-  </script>
   </script>
 </body>
 

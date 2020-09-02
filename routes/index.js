@@ -18,6 +18,20 @@ router.get('/last', async (req, res) => {
   });
 });
 
+// analytics
+router.get('/analytics', async (req, res) => {
+  res.render('analytics', {
+    title: '0元領取129元直播課',
+    btn_text: '馬上0元領取',
+    success_text: '領取成功！請等候老師聯繫您！',
+    gtag_label: '-CuKCP3gm9kBEKTe56IC',
+    gtagid: 'AW-609873700',
+    paramList: 'lpid=23012&ext=__LANDINGPAGE_EXT__',
+    top_img: '/public/top.jpg',
+    bottom_img: '/public/bottom.jpg',
+  });
+});
+
 // 登录页面
 router.get('/refresh', async (req, res) => {
   await fetch();

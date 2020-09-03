@@ -15,6 +15,7 @@ router.get('/last', async (req, res) => {
     paramList: 'lpid=23012&ext=__LANDINGPAGE_EXT__',
     top_img: '/public/top.jpg',
     bottom_img: '/public/bottom.jpg',
+    country: []
   });
 });
 
@@ -53,29 +54,18 @@ async function fetch() {
   return await Promise.all(
     data.map((d) => {
       router.get(`/${d.url}`, async (req, res) => {
-        if (d.template === 'temp') {
-          res.render(`${d.template}`, {
-            title: d.title,
-            btn_text: d.btn_text,
-            gtag_label: d.gtag_label,
-            gtagid: d.gtagid,
-            paramList: d.paramList,
-            top_img: d.top_img,
-            bottom_img: d.bottom_img,
-          });
-        } else {
-          console.log(d.url);
-          res.render(`${d.template}`, {
-            title: d.title,
-            btn_text: d.btn_text,
-            gtag_label: d.gtag_label,
-            gtagid: d.gtagid,
-            paramList: d.paramList,
-            top_img: d.top_img,
-            bottom_img: d.bottom_img,
-            active_url: d.active_url,
-          });
-        }
+        res.render(`last`, {
+          title: d.title,
+          btn_text: d.btn_text,
+          gtag_label: d.gtag_label,
+          gtagid: d.gtagid,
+          paramList: d.paramList,
+          success_text: d.success_text,
+          top_img: d.top_img,
+          bottom_img: d.bottom_img,
+          active_url: d.active_url,
+          country: d.country,
+        });
       });
     })
   );

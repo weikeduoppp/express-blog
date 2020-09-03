@@ -58,6 +58,7 @@
       border: 1px solid transparent;
       border-radius: .25rem;
     }
+
     .required {
       color: #f00;
     }
@@ -185,7 +186,11 @@
 
     function checkValue(param) {
       if (!param.id0 || !param.id1 || !param.id2) {
-        $('#toast_id').text("请輸入完整").slideDown()
+        $('#toast_id').text("请輸入完整").slideDown(200, () => {
+          setTimeout(() => {
+            $('#toast_id').hide()
+          }, 3000)
+        })
         return true
       }
       return false

@@ -2,20 +2,24 @@ var env = process.env.NODE_ENV === "production";
 const mysql = require('mysql');
 let dev = {
   host: "127.0.0.1",
-  user:  "root",
-  password: "luojin",
-  database: "fb", 
+  user:  "yewq",
+  password: "123123",
+  database: "rotategame", 
   port: 3306,
 };
 
 function createConnection() {
-  return mysql.createConnection(env ? {
-    host: "10.168.17.250",
-    user: "fb_que_admin",
-    password: "VZ8R61GXh*be",
-    database: "rotateGame",
-    port: 3306,
-  } : dev);
+  return mysql.createConnection(
+    env
+      ? {
+          host: "47.104.88.94",
+          user: "yewq",
+          password: "123123",
+          database: "rotateGame",
+          port: 3306,
+        }
+      : dev
+  );
 }
 
 

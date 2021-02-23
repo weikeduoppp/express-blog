@@ -15,7 +15,7 @@ function createConnection() {
           host: "47.104.88.94",
           user: "yewq",
           password: "123123",
-          database: "rotateGame",
+          database: "rotategame",
           port: 3306,
         }
       : dev

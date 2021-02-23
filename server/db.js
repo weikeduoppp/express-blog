@@ -12,7 +12,7 @@ function createConnection() {
   return mysql.createConnection(
     env
       ? {
-          host: "47.104.88.94",
+          host: "127.0.0.1",
           user: "yewq",
           password: "123123",
           database: "rotategame",

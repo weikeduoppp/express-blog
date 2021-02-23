@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "blog",
+      name: "rotateGame",
       script: "./bin/www",
       env: {
         COMMON_VARIABLE: "true",

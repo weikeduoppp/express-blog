@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const apiRouter = require('./routers/api')
 const { connection } = require("./server/db")
-
+const cors = require('cors')
 
 const app = express();
 
+// 跨域
+app.use(cors());
 // 相关配置
 app.use(logger('dev'));
 // 添req.body -> post请求
@@ -28,7 +30,7 @@ app.use(
 app.engine('html', require('express-art-template'));
 app.set('view engine', 'html');
 // 设置目录 默认views文件夹
-// app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // 路由
 app.use("/", apiRouter);

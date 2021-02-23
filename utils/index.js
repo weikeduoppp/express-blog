@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const promisify = require("util").promisify;
 const rename = promisify(fs.rename);
-const { uploadPath } = require("../server/config");
+const uploadPath = "../public/upload";
 require("es6-promise").polyfill();
 
 const fetch = require("isomorphic-fetch");

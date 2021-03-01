@@ -70,7 +70,7 @@ router.get("/receive", async (req, res) => {
       const prize = random(prizes, prizeNums);
       res.json({
         status: 1,
-        data: data.find((d) => (d.name = prize)),
+        data: data.find((d) => (d.name === prize)),
       });
     } else {
       res.json({

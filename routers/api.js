@@ -43,8 +43,10 @@ router.get("/collection", async (req, res) => {
 
 // 领取
 router.get("/receive", async (req, res) => {
-  let { id } = req.query; 
-  let checkSql = `select prize_id from collection where id = ${mysql.escape(id)};`;
+  let { id } = req.query;
+  let checkSql = `select prize_id from collection where id = ${mysql.escape(
+    id
+  )};`;
   // 转义.
   let sql = `select id,name,num from prize;`;
   try {
@@ -70,12 +72,12 @@ router.get("/receive", async (req, res) => {
       const prize = random(prizes, prizeNums);
       res.json({
         status: 1,
-        data: data.find((d) => (d.name === prize)),
+        data: data.find((d) => d.name === prize),
       });
     } else {
       res.json({
         status: 0,
-        msg: "此链接已被领取~,请联系相应客服"
+        msg: "此链接已被领取~,请联系相应客服",
       });
     }
   } catch (e) {
@@ -89,14 +91,19 @@ router.get("/receive", async (req, res) => {
 
 // 确认领取
 router.post("/receive", async (req, res) => {
-  let { name, prize_id, vx, key, num } = req.body;
+  let { name, prize_id, vx, key } = req.body;
+  const [{ num }] = await query(
+    `select num from prize where id = ${mysql.escape(prize_id)}`
+  );
   // 转义.
   let sql = `update collection set name = ${mysql.escape(
     name
   )}, vx = ${mysql.escape(vx)}, prize_id = ${mysql.escape(
     prize_id
   )} where id = ${mysql.escape(key)}`;
-  let sql2 = `update prize set num = ${mysql.escape(num)}  where id = ${mysql.escape(prize_id)}`;
+  let sql2 = `update prize set num = ${num - 1}  where id = ${mysql.escape(
+    prize_id
+  )}`;
   try {
     await query(sql);
     await query(sql2);
